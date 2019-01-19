@@ -87,7 +87,7 @@ echo 'Press ENTER to continue...'
 read
 cfdisk /dev/sd"$partitionLet"
 clear
-fdisk -l
+fdisk /dev/sd"$partitionLet" -l
 echo 'Press ENTER to continue...'
 read
 
