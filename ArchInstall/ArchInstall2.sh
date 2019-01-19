@@ -21,7 +21,7 @@ ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 echo 'Generateing "/etc/adjtime"'
 hwclock --systohc
 
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
@@ -30,7 +30,7 @@ echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 echo 'hu_HU.UTF-8 UTF-8' >> /etc/locale.gen
 echo 'Generateing locales...'
 locale-gen
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
@@ -48,7 +48,7 @@ KEYMAP=$(default_values "$KEYMAP" "hu" "us")
 
 touch /etc/vconsole.conf
 echo "KEYMAP=$KEYMAP" >> /etc/vconsole.conf
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
@@ -57,7 +57,7 @@ echo 'Enter the name of the computer: '
 read HOSTNAME
 touch /etc/hostname
 echo "$HOSTNAME" >> /etc/hostname
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
@@ -79,21 +79,21 @@ echo 'What is the IPv4 localdomain'
 read ipv4ld
 echo "$ipv4ld	$HOSTNAME.localdomain $HOSTNAME" >> /etc/hosts
 
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
 echo 'Creating new initramfs...'
 mkinitcpio -p linux
 
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
 echo 'Setting root password...'
 passwd
 
-echo 'Press any key to continue...'
+echo 'Press ENTER to continue...'
 read
 clear
 
