@@ -85,7 +85,7 @@ read partitionLet
 
 echo 'Press ENTER to continue...'
 read
-cfdisk /dev/sd"$paritionLet"
+cfdisk /dev/sd"$partitionLet"
 clear
 fdisk -l
 echo 'Press ENTER to continue...'
@@ -95,7 +95,7 @@ declare -i partitionNum
 echo 'Whitch directory is the ROOT partition? [number]'
 read partitionNum
 mkfs.ext4 /dev/sd"$partitionLet""$partitionNum"
-mount /dev/sd*"$partitionNum" /mnt
+mount /dev/sd"$partitionLet""$partitionNum" /mnt
 echo 'Whitch directory is the BOOT/EFI partition? [number]'
 read partitionNum
 mkdir /mnt/boot
