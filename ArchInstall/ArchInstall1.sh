@@ -38,7 +38,7 @@ clear
 
 echo 'The system has to have UEFI mode enabled on the motherboard to get this installer to work!'
 declare uefi
-echo 'Are you shure that UEFI is enabled on the system? [y, n] (default: n)'
+echo 'Are you sure that UEFI is enabled on the system? [y, n] (default: n)'
 read uefi
 uefi=$(default_values "$uefi" "n" "y")
 if [ $uefi == "n" ];
