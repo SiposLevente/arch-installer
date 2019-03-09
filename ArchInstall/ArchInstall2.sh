@@ -106,8 +106,7 @@ GRUB=$(default_values "$GRUB" "y" "n")
 if [ $GRUB == "y" ];
 then
 		echo 'Downloading and Installing GRUB and efibootmgr'
-		pacman -S grub
-		pacman -S efibootmgr
+		pacman -S grub efibootmgr --noconfirm
 
 		grub-install --target=x86_64-efi --efi-directory=/boot
 		grub-mkconfig -o /boot/grub/grub.cfg
