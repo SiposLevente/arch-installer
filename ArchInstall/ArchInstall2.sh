@@ -67,15 +67,15 @@ declare ipv4lh
 declare ipv6lh
 declare ipv4ld
 
-echo 'What is the IPv4 localhost'
+echo 'Enter the IPv4 address that you want to use as localhost'
 read ipv4lh
 echo "$ipv4lh	localhost" >> /etc/hosts
 
-echo 'What is the IPv6 localhost'
+echo 'Enter the IPv6 address that you want to use as localhost'
 read ipv6lh
 echo "$ipv6lh	localhost" >> /etc/hosts
 
-echo 'What is the IPv4 localdomain'
+echo 'Enter the IPv4 address that you want to use as localdomain'
 read ipv4ld
 echo "$ipv4ld	$HOSTNAME.localdomain $HOSTNAME" >> /etc/hosts
 
