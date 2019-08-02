@@ -61,7 +61,7 @@ network=$(default_values "$network" "y" "n")
 
 if [ $network == "y" ];then
 		ping -c 5 archlinux.org
-		echo 'If the ping was succesful you can continue, otherwise you shold fix the network first'
+		echo 'If the ping was succesful you can continue, otherwise you should fix the network first'
 		echo 'Press ENTER to continue...'
 		read
 fi
