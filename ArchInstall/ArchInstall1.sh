@@ -125,7 +125,7 @@ echo 'Copying the mirrorlist...'
 rm /etc/pacman.d/mirrorlist
 cp mirrorlist /etc/pacman.d
 echo 'Downloading the packpages (base, base-devel)...'
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel dhcpcd less linux-firmware linux vim man-db man-pages netctl
 
 echo 'Press ENTER to continue...'
 read
