@@ -1,14 +1,14 @@
-default_values(){
+default_values() {
 	local valt
 	local def
 	local masik
-	
+
 	valt=$1
 	def=$2
 	masik=$3
 
 	if [ "$valt" != "$def" ]; then
-		if [ "$valt" != "$masik" ];then		
+		if [ "$valt" != "$masik" ]; then
 			valt=$def
 		fi
 	fi
@@ -30,9 +30,8 @@ echo 'The default layout for this installer is hungarian. Do you wish to change 
 read layout
 
 layout=$(default_values "$layout" "n" "y")
-if [ $layout == "y" ];
-then
-		loadkeys us
+if [ $layout == "y" ]; then
+	loadkeys us
 fi
 clear
 
@@ -41,10 +40,9 @@ declare uefi
 echo 'Are you sure that UEFI is enabled on the system? [y, n] (default: n)'
 read uefi
 uefi=$(default_values "$uefi" "n" "y")
-if [ $uefi == "n" ];
-then
-		ls /sys/firmware/efi/efivars
-		echo 'If the previous step returned strings then the system has UEFI, otherwise you should exit the script with CTRL+C'
+if [ $uefi == "n" ]; then
+	ls /sys/firmware/efi/efivars
+	echo 'If the previous step returned strings then the system has UEFI, otherwise you should exit the script with CTRL+C'
 
 fi
 
@@ -87,13 +85,12 @@ declare HOME
 echo 'Do you have a HOME directory? [y, n] (default: n)'
 read HOME
 HOME=$(default_values "$HOME" "n" "y")
-if [ $HOME == "y" ];
-then
-	   echo 'Whitch directory is the HOME partition? [number]'
-	   read partitionNum
-	   mkdir /mnt/home
-	   mkfs.ext4 /dev/sd"$partitionLet""$partitionNum"
-	   mount /dev/sd"$partitionLet""$partitionNum" /mnt/home
+if [ $HOME == "y" ]; then
+	echo 'Whitch directory is the HOME partition? [number]'
+	read partitionNum
+	mkdir /mnt/home
+	mkfs.ext4 /dev/sd"$partitionLet""$partitionNum"
+	mount /dev/sd"$partitionLet""$partitionNum" /mnt/home
 fi
 clear
 
@@ -104,13 +101,12 @@ echo 'Downloading the packpages (base, base-devel)...'
 pacstrap /mnt base base-devel dhcpcd less linux-firmware linux vim man-db man-pages netctl
 
 echo 'Generating fstab...'
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >>/mnt/etc/fstab
 
 cp ArchInstall2.sh /mnt/ArchInstall2.sh
 
 echo 'Changing root into the new system...'
 arch-chroot /mnt ./ArchInstall2.sh
-
 
 declare um
 echo 'Shoud the partitions be unmounted? [y, n] (default y)'
@@ -118,9 +114,8 @@ read um
 
 um=$(default_values "$um" "y" "n")
 
-if [ $um == "y" ];
-then
-		umount -R /mnt
+if [ $um == "y" ]; then
+	umount -R /mnt
 fi
 
 declare rb
@@ -130,14 +125,13 @@ read rb
 
 rb=$(default_values "$rb" "y" "n")
 
-if [ $rb == "y" ];
-then
-	   echo 'Arch Linux has been succesfully installed on this computer! Thank you for using my installer!'
-	   echo 'To reboot press any key...'
-	   reboot
+if [ $rb == "y" ]; then
+	echo 'Arch Linux has been succesfully installed on this computer! Thank you for using my installer!'
+	echo 'To reboot press any key...'
+	reboot
 fi
 
-echo 'Arch Linux has been succesfully installed on this computer! Thank you for using my installer!'
+echo 'Arch Linux has been successfully installed on this computer! Thank you for using my installer!'
 echo 'Press ENTER to continue...'
 read
 clear
