@@ -18,21 +18,14 @@ default_values(){
 echo 'Setting timezone to Europe/Budapest...'
 ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 
-echo 'Generateing "/etc/adjtime"'
+echo 'Generating "/etc/adjtime"'
 hwclock --systohc
-
-echo 'Press ENTER to continue...'
-read
-clear
 
 echo 'Copying locales...'
 echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 echo 'hu_HU.UTF-8 UTF-8' >> /etc/locale.gen
-echo 'Generateing locales...'
+echo 'Generating locales...'
 locale-gen
-echo 'Press ENTER to continue...'
-read
-clear
 
 echo 'Setting system language to US english'
 touch /etc/locale.conf
@@ -57,45 +50,20 @@ echo 'Enter the name of the computer: '
 read HOSTNAME
 touch /etc/hostname
 echo "$HOSTNAME" >> /etc/hostname
-echo 'Press ENTER to continue...'
-read
-clear
-
 echo 'Creating host config'
 
-declare ipv4lh
-declare ipv6lh
-declare ipv4ld
-
-echo 'Enter the IPv4 address that you want to use as localhost'
-read ipv4lh
-echo "$ipv4lh	localhost" >> /etc/hosts
-
-echo 'Enter the IPv6 address that you want to use as localhost'
-read ipv6lh
-echo "$ipv6lh	localhost" >> /etc/hosts
+echo "127.0.0.1	localhost" >> /etc/hosts
+echo "::1	localhost" >> /etc/hosts
 
 echo 'Enter the IPv4 address that you want to use as localdomain'
 read ipv4ld
-echo "$ipv4ld	$HOSTNAME.localdomain $HOSTNAME" >> /etc/hosts
-
-echo 'Press ENTER to continue...'
-read
-clear
+echo "127.0.1.1	$HOSTNAME.localdomain $HOSTNAME" >> /etc/hosts
 
 echo 'Creating new initramfs...'
 mkinitcpio -p linux
 
-echo 'Press ENTER to continue...'
-read
-clear
-
 echo 'Setting root password...'
 passwd
-
-echo 'Press ENTER to continue...'
-read
-clear
 
 declare GRUB
 echo 'Should GRUB be installed on the system? [y, n] (default: y)'

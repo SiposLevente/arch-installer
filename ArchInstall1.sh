@@ -52,44 +52,22 @@ echo 'Press ENTER to continue...'
 read
 clear
 
-declare network
-
-echo 'Do you want to check if you have network connection? [y, n] (default: y)'
-read network
-
-network=$(default_values "$network" "y" "n")
-
-if [ $network == "y" ];then
-		ping -c 5 archlinux.org
-		echo 'If the ping was succesful you can continue, otherwise you should fix the network first'
-		echo 'Press ENTER to continue...'
-		read
-fi
 echo 'Network time protocol enabled'
 timedatectl set-ntp true
-echo 'Press ENTER to continue...'
-read
-clear
 
-echo 'Updateing repositories'
+echo 'Updating repositories'
 pacman -Syy
-echo 'Press enter to continue...'
-read
-clear
 
 declare partitionLet
 fdisk -l
 echo 'Which partition letter reffers to your storage system (eg.: sd[a], sd[b], sd[c]. Just write here the last letter)?'
 read partitionLet
 
-
 echo 'Press ENTER to continue...'
 read
 cfdisk /dev/sd"$partitionLet"
 clear
 fdisk /dev/sd"$partitionLet" -l
-echo 'Press ENTER to continue...'
-read
 
 declare -i partitionNum
 echo 'Whitch directory is the ROOT partition? [number]'
@@ -117,8 +95,6 @@ then
 	   mkfs.ext4 /dev/sd"$partitionLet""$partitionNum"
 	   mount /dev/sd"$partitionLet""$partitionNum" /mnt/home
 fi
-echo 'Press ENTER to continue...'
-read
 clear
 
 echo 'Copying the mirrorlist...'
@@ -127,25 +103,13 @@ cp mirrorlist /etc/pacman.d
 echo 'Downloading the packpages (base, base-devel)...'
 pacstrap /mnt base base-devel dhcpcd less linux-firmware linux vim man-db man-pages netctl
 
-echo 'Press ENTER to continue...'
-read
-clear
-
-echo 'Generateing fstab...'
+echo 'Generating fstab...'
 genfstab -U /mnt >> /mnt/etc/fstab
 
 cp ArchInstall2.sh /mnt/ArchInstall2.sh
 
-echo 'Press ENTER to continue...'
-read
-clear
-
-echo 'Changeing root into the new system...'
+echo 'Changing root into the new system...'
 arch-chroot /mnt ./ArchInstall2.sh
-
-echo 'Press ENTER to continue...'
-read
-clear
 
 
 declare um
@@ -168,12 +132,12 @@ rb=$(default_values "$rb" "y" "n")
 
 if [ $rb == "y" ];
 then
-	   echo 'Arch Linux has been succesfully installed on this computer! Thank you for useing my installer!'
+	   echo 'Arch Linux has been succesfully installed on this computer! Thank you for using my installer!'
 	   echo 'To reboot press any key...'
 	   reboot
 fi
 
-echo 'Arch Linux has been succesfully installed on this computer! Thank you for useing my installer!'
+echo 'Arch Linux has been succesfully installed on this computer! Thank you for using my installer!'
 echo 'Press ENTER to continue...'
 read
 clear
