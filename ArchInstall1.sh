@@ -101,7 +101,7 @@ echo 'Downloading the packpages (base, base-devel)...'
 pacstrap /mnt base base-devel dhcpcd less linux-firmware linux vim man-db man-pages netctl
 
 echo 'Generating fstab...'
-genfstab -U /mnt >>/mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 cp ArchInstall2.sh /mnt/ArchInstall2.sh
 
