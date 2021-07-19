@@ -61,8 +61,6 @@ fdisk -l
 echo 'Which partition letter reffers to your storage system (eg.: sd[a], sd[b], sd[c]. Just write here the last letter)?'
 read partitionLet
 
-echo 'Press ENTER to continue...'
-read
 cfdisk /dev/sd"$partitionLet"
 clear
 fdisk /dev/sd"$partitionLet" -l

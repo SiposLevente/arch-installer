@@ -54,9 +54,6 @@ echo 'Creating host config'
 
 echo "127.0.0.1	localhost" >> /etc/hosts
 echo "::1	localhost" >> /etc/hosts
-
-echo 'Enter the IPv4 address that you want to use as localdomain'
-read ipv4ld
 echo "127.0.1.1	$HOSTNAME.localdomain $HOSTNAME" >> /etc/hosts
 
 echo 'Creating new initramfs...'
