@@ -16,7 +16,6 @@ default_values() {
 }
 
 loadkeys hu
-clear
 echo 'I AM NOT RESPONSIBLE FOR ANY DATALOSS, OR OTHER PROBLEMS THAT MIGHT APPEAR DURING THE INSTALLATION!!!'
 echo 'THIS ONLY WORKS IF YOU ONLY WANT TO MAKE THE PARTITONS "ROOT" "SWAP" "HOME" "BOOT/EFI"'
 echo 'THIS INSTALLER IS NOT A FOOL PROOF INSTALLER, SO INSTALL CAREFULLY!'
@@ -37,9 +36,9 @@ clear
 
 echo 'The system has to have UEFI mode enabled on the motherboard to get this installer to work!'
 declare uefi
-echo 'Are you sure that UEFI is enabled on the system? [y, n] (default: n)'
+echo 'Are you sure that UEFI is enabled on the system? [y, n] (default: y)'
 read uefi
-uefi=$(default_values "$uefi" "n" "y")
+uefi=$(default_values "$uefi" "y" "n")
 if [ $uefi == "n" ]; then
 	ls /sys/firmware/efi/efivars
 	echo 'If the previous step returned strings then the system has UEFI, otherwise you should exit the script with CTRL+C'
