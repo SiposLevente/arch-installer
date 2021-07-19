@@ -101,7 +101,7 @@ echo 'Downloading the packpages (base, base-devel)...'
 pacstrap /mnt base base-devel dhcpcd less linux-firmware linux vim man-db man-pages netctl
 
 echo 'Generating fstab...'
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >>/mnt/etc/fstab
 
 cp ArchInstall2.sh /mnt/ArchInstall2.sh
 
@@ -110,30 +110,12 @@ arch-chroot /mnt ./ArchInstall2.sh
 
 declare um
 echo 'Shoud the partitions be unmounted? [y, n] (default y)'
+echo 'Arch Linux was successfully installed! If you would like to do anything else to the computer before it reboots into the system DO NOT unmount the partitions!'
 read um
 
 um=$(default_values "$um" "y" "n")
 
 if [ $um == "y" ]; then
 	umount -R /mnt
-fi
-
-declare rb
-
-echo 'Shoud the computer be rebooted into Arch? [y, n] (default y)'
-read rb
-
-rb=$(default_values "$rb" "y" "n")
-
-if [ $rb == "y" ]; then
-	echo 'Arch Linux has been succesfully installed on this computer! Thank you for using my installer!'
-	echo 'To reboot press any key...'
 	reboot
 fi
-
-echo 'Arch Linux has been successfully installed on this computer! Thank you for using my installer!'
-echo 'Press ENTER to continue...'
-read
-clear
-
-echo "Exiting installer!"
