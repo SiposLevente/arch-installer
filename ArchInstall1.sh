@@ -59,7 +59,7 @@ declare partitionLet
 fdisk -l
 
 declare loopExit="0"
-while [ loopExit != "1" ]; do
+while [ $loopExit != "1" ]; do
 	echo 'Which partition do you want to format? (eg.: sda, sdb, sdc)'
 	read partitionLet
 	cfdisk /dev/"$partitionLet"
