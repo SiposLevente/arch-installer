@@ -75,7 +75,7 @@ done
 clear
 fdisk -l
 
-declare -i partitionNum
+declare partitionNum
 echo 'Whitch directory is the ROOT partition? [partition name and number] (eg.: sda1, sdb2, sdc3)'
 read partitionNum
 mkfs.ext4 /dev/"$partitionNum"
