@@ -57,37 +57,48 @@ pacman -Syy
 
 declare partitionLet
 fdisk -l
-echo 'Which partition letter reffers to your storage system (eg.: sd[a], sd[b], sd[c]. Just write here the last letter)?'
-read partitionLet
 
-cfdisk /dev/sd"$partitionLet"
+declare loopExit = 0
+while [ loopExit != 1 ]; do
+	echo 'Which partition do you want to format? (eg.: sda, sdb, sdc)'
+	read partitionLet
+	cfdisk /dev/"$partitionLet"
+
+	declare partAgain
+	echo 'Do you want to partition another drive? [y, n] (default: y)'
+	read partAgain
+	partAgain=$(default_values "$partAgain" "y" "n")
+	if [ $partAgain == "n" ]; then
+		loopExit=1
+	fi
+done
 clear
-fdisk /dev/sd"$partitionLet" -l
+fdisk -l
 
 declare -i partitionNum
-echo 'Whitch directory is the ROOT partition? [number]'
+echo 'Whitch directory is the ROOT partition? [partition name and number] (eg.: sda1, sdb2, sdc3)'
 read partitionNum
-mkfs.ext4 /dev/sd"$partitionLet""$partitionNum"
-mount /dev/sd"$partitionLet""$partitionNum" /mnt
-echo 'Whitch directory is the BOOT/EFI partition? [number]'
+mkfs.ext4 /dev/"$partitionNum"
+mount /dev/"$partitionNum" /mnt
+echo 'Whitch directory is the BOOT/EFI partition? [partition name and number]'
 read partitionNum
 mkdir /mnt/boot
-mkfs.vfat /dev/sd"$partitionLet""$partitionNum"
-mount /dev/sd"$partitionLet""$partitionNum" /mnt/boot
-echo 'Whitch directory is the SWAP partition? [number]'
+mkfs.vfat /dev/"$partitionNum"
+mount /dev/"$partitionNum" /mnt/boot
+echo 'Whitch directory is the SWAP partition? [partition name and number]'
 read partitionNum
-mkswap /dev/sd"$partitionLet""$partitionNum"
-swapon /dev/sd"$partitionLet""$partitionNum"
+mkswap /dev/"$partitionNum"
+swapon /dev/"$partitionNum"
 declare HOME
 echo 'Do you have a HOME directory? [y, n] (default: n)'
 read HOME
 HOME=$(default_values "$HOME" "n" "y")
 if [ $HOME == "y" ]; then
-	echo 'Whitch directory is the HOME partition? [number]'
+	echo 'Whitch directory is the HOME partition? [partition name and number]'
 	read partitionNum
 	mkdir /mnt/home
-	mkfs.ext4 /dev/sd"$partitionLet""$partitionNum"
-	mount /dev/sd"$partitionLet""$partitionNum" /mnt/home
+	mkfs.ext4 /dev/"$partitionNum"
+	mount /dev/"$partitionNum" /mnt/home
 fi
 clear
 
