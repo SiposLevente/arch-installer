@@ -79,15 +79,18 @@ declare partitionNum
 echo 'Whitch directory is the ROOT partition? [partition name and number] (eg.: sda1, sdb2, sdc3)'
 read partitionNum
 mkfs.ext4 /dev/"$partitionNum"
+echo "Mounting /dev/$partitionNum to /mnt"
 mount /dev/"$partitionNum" /mnt
 echo 'Whitch directory is the BOOT/EFI partition? [partition name and number]'
 read partitionNum
 mkdir /mnt/boot
 mkfs.vfat /dev/"$partitionNum"
+echo "Mounting /dev/$partitionNum to /mnt/boot"
 mount /dev/"$partitionNum" /mnt/boot
 echo 'Whitch directory is the SWAP partition? [partition name and number]'
 read partitionNum
 mkswap /dev/"$partitionNum"
+echo "Turning swap on /dev/$partitionNum"
 swapon /dev/"$partitionNum"
 declare HOME
 echo 'Do you have a HOME directory? [y, n] (default: n)'
