@@ -58,9 +58,8 @@ pacman -Syy
 declare partitionLet
 fdisk -l
 
-declare loopExit
-loopExit=0
-while [ loopExit != 1 ]; do
+declare loopExit="0"
+while [ loopExit != "1" ]; do
 	echo 'Which partition do you want to format? (eg.: sda, sdb, sdc)'
 	read partitionLet
 	cfdisk /dev/"$partitionLet"
@@ -70,7 +69,7 @@ while [ loopExit != 1 ]; do
 	read partAgain
 	partAgain=$(default_values "$partAgain" "y" "n")
 	if [ $partAgain == "n" ]; then
-		loopExit=1
+		loopExit="1"
 	fi
 done
 clear
