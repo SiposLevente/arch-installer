@@ -63,7 +63,7 @@ echo 'Setting root password...'
 passwd
 
 echo 'Installing networking applications...'
-pacman -S netctl wpa_supplicant --noconfirm
+pacman -S netctl wpa_supplicant networkmanager --noconfirm
 clear
 
 declare GRUB
