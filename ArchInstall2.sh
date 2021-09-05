@@ -62,6 +62,10 @@ mkinitcpio -p linux
 echo 'Setting root password...'
 passwd
 
+echo 'Installing networking applications...'
+pacman -S netctl wpa_supplicant --noconfirm
+clear
+
 declare GRUB
 echo 'Should GRUB be installed on the system? [y, n] (default: y)'
 read GRUB
