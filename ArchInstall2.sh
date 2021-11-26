@@ -18,6 +18,8 @@ default_values(){
 echo 'Setting timezone to Europe/Budapest...'
 ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 
+sed -i '10 i ParallelDownloads = 5' /etc/pacman.conf 
+
 echo 'Generating "/etc/adjtime"'
 hwclock --systohc
 

@@ -48,7 +48,7 @@ fi
 echo 'Press ENTER to continue...'
 read
 clear
-
+sed -i '10 i ParallelDownloads = 5' /etc/pacman.conf 
 echo 'Network time protocol enabled'
 timedatectl set-ntp true
 
